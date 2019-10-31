@@ -67,6 +67,16 @@ var config = {
   extranls: {
     'jquery': 'window.jQuery'
   },
+  devServer: {
+    port: 8088,
+    inline: true,
+    proxy: {
+      '**/*.do': {
+        target: 'http://test.happymmall.com',
+        changeOrigin: true
+      }
+    }
+  }
 };
 
 module.exports = config;
