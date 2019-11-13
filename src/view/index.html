@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<%= require('html-loader!./layout/html-head.html')  %>
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+<head>
+  <%= require('html-loader!./layout/head-common.html')  %>
+  <title>HPmxw电商平台</title>
+</head>
 
 <body>
-
+  <%= require('html-loader!./layout/nav.html')  %>
+  <%= require('html-loader!./layout/header.html')  %>
+  <!-- 侧边栏 -->
+  <div class="page-wrap w">
+    <%= require('html-loader!./layout/nav-side.html')  %>
+    <!-- 用 with-nav 表明是有一个侧边栏的，要让出宽度 -->
+    <div class="content with-nav">
+      contenat
+    </div>
+  </div>
+  <%= require('html-loader!./layout/footer.html')  %>
 </body>
 
 </html>

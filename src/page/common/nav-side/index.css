@@ -1,0 +1,26 @@
+/* 侧边栏 */
+.nav-side {
+  float: left;
+  min-height: 100px;
+  width: 130px;
+}
+
+.nav-side .nav-item {
+  line-height: 25px;
+  font-size: 13px;
+}
+
+.nav-side .nav-item .link {
+  color: #888;
+}
+
+.nav-side .nav-item.active .link {
+  color: #c60023;
+}
+
+/* 右侧内容 */
+.content.with-nav {
+  float: left;
+  /* 根据定宽布局 - 侧边栏的宽度 */
+  width: 950px;
+}

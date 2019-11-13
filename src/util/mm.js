@@ -1,3 +1,4 @@
+var Hogan = require("hogan.js");
 var conf = {
   serverHost: ''
 }
@@ -44,9 +45,43 @@ var _mm = {
     var result = window.location.search.substr(1).match(reg);
     return result ? decodeURIComponent(result[2]) : null;
   },
-  // 跳转首页
+  // 渲染 html 模板
+  renderHtml: function (htmlTemplate, data) {
+    var template = Hogan.compile(htmlTemplate),
+      result = template.render(data);
+    return result;
+  },
+  // 字段验证，支持非空，手机，邮箱的判断
+  validate: function (value, type) {
+    var value = $.trim(value);
+    // 非空验证
+    if ('require' === type) {
+      return !!value;
+    }
+    // 手机号验证
+    if ('phone' === type) {
+      return /^1\d{10}$/.test(value);
+    }
+    // 邮箱雁阵
+    if ('email' === type) {
+      return /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/.test(value);
+    }
+  },
+  // 成功提示
+  successTips: function (msg) {
+    alert(msg || "操作成功")
+  },
+  // 失败提示
+  errorTips: function (msg) {
+    alert(msg || "操作失败，哪里不对！")
+  },
+  // 统一登录处理
   doLogin: function () {
-    window.location.href = "./user-login.html?redirect=" + odeURIComponent(window.location.href);
+    window.location.href = "./user-login.html?redirect=" + encodeURIComponent(window.location.href);
+  },
+  // 返回首页
+  gohome: function () {
+    window.location.href = "./index.html";
   }
 }
 
