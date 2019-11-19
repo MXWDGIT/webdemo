@@ -29,6 +29,7 @@ var config = {
   entry: {
     'common': ['./src/page/common/index.js'],
     'index': ['./src/page/index/index.js'],
+    'user-login': ['./src/page/user-login/index.js'],
     'result': ['./src/page/result/index.js'],
   },
   // 定义构建后文件的出口
@@ -48,6 +49,7 @@ var config = {
     new ExtractTextPlugin("css/[name].css"),
     // html 模板的处理
     new htmlWebpackPlugin(getHtmlConfig('index', '首页')),
+    new htmlWebpackPlugin(getHtmlConfig('user-login', '用户登录')),
     new htmlWebpackPlugin(getHtmlConfig('result', '操作结果')),
   ],
   // 关于模块的加载相关

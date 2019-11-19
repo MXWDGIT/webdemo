@@ -58,12 +58,11 @@
   position: absolute;
   width: 80px;
   height: 44px;
-}/* 导航主体 */
-
+}/* 侧边栏 */
 .nav-side {
   float: left;
-  width: 130px;
   min-height: 100px;
+  width: 130px;
 }
 
 .nav-side .nav-item {
@@ -79,9 +78,9 @@
   color: #c60023;
 }
 
-/* 右侧内容区 */
-
+/* 右侧内容 */
 .content.with-nav {
   float: left;
+  /* 根据定宽布局 - 侧边栏的宽度 */
   width: 950px;
 }

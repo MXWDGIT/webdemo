@@ -1134,26 +1134,24 @@ webpackJsonp([1],[
 	    ]
 	  },
 	  init: function (option) {
-	    // 合并选项
 	    $.extend(this.option, option);
 	    this.renderNav();
-	    return this;
 	  },
-	  // 渲染导航菜单
+	  // 渲染侧边栏
 	  renderNav: function () {
-	    // 计算active数据
+	    // 计算 acrive 属性
 	    for (var i = 0, iLength = this.option.navList.length; i < iLength; i++) {
 	      if (this.option.navList[i].name === this.option.name) {
 	        this.option.navList[i].isActive = true;
 	      }
 	    };
-	    // 渲染list数据
+	    // 创建模板并传入数据
 	    var navHtml = _mm.renderHtml(templateIndex, {
 	      navList: this.option.navList
 	    });
-	    // 把html放入容器
+	    // 把渲染好的模板放入 ul 
 	    $('.nav-side').html(navHtml);
-	  }
+	  },
 	};
 	module.exports = navSide;
 
