@@ -32,7 +32,7 @@ var nav = {
   // 用户信息，判断登录状态
   loadUserInfo: function () {
     _user.checkLogin(function (res) {
-      $('.user .no-login').hide().siblings('.user .login').show().find('.username').text(res.username);
+      $('.user.no-login').hide().siblings('.user.login').show().find('.username').text(res.username);
     }, function (errMsg) {
       // do nothing
     });

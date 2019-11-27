@@ -1,8 +1,8 @@
-webpackJsonp([1],[
+webpackJsonp([4],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(18);
+	module.exports = __webpack_require__(45);
 
 
 /***/ }),
@@ -23,16 +23,7 @@ webpackJsonp([1],[
 /* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(19);
-	__webpack_require__(28);
-	var navSide = __webpack_require__(31);
-	var _mm = __webpack_require__(22);
-
-
-/***/ }),
+/* 18 */,
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1257,6 +1248,132 @@ webpackJsonp([1],[
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=\"nav-item\"> {{/isActive}} <a class=\"link\" href=\"{{href}}\">{{desc}}</a> </li> {{/navList}} ";
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(46);
+	__webpack_require__(19);
+	__webpack_require__(28);
+	var navSide = __webpack_require__(31);
+	var _user = __webpack_require__(26);
+	var _mm = __webpack_require__(22);
+	var templateIndex = __webpack_require__(48);
+
+
+
+	var page = {
+	  init: function () {
+	    this.onLoad();
+	    this.bindEvent();
+	  },
+	  bindEvent: function () {
+	    var _this = this;
+	    // 提交按钮点击
+	    $(document).on('click', '.btn-submit', function () {
+	      var userInfo = {
+	          phone: $.trim($('#phone').val()),
+	          email: $.trim($('#email').val()),
+	          question: $.trim($('#question').val()),
+	          answer: $.trim($('#answer').val())
+	        },
+	        validateResult = _this.validateResult(userInfo);
+
+	      if (validateResult.status) {
+	        // 更改用户信息
+	        _user.updateUserInfo(userInfo, function (res, msg) {
+	          _mm.successTips(msg);
+	          window.location.href = './user-center.html';
+	        }, function (errMsg) {
+	          _mm.errorTips(errMsg);
+	        });
+	      } else {
+	        _mm.errorTips(validateResult.msg);
+	      }
+	    });
+	  },
+	  onLoad: function () {
+	    // 初始化左侧菜单
+	    navSide.init({
+	      name: 'user-center'
+	    });
+
+	    // 加载用户信息
+	    this.loadUserInfo();
+	  },
+	  // 初始化用户信息
+	  loadUserInfo: function () {
+	    var userHtml = '';
+	    _user.getUserInfo(function (res) {
+	      userHtml = _mm.renderHtml(templateIndex, res);
+	      $('.panel-body').html(userHtml);
+	    }, function (errMsg) {
+	      _mm.errorTips(errMsg);
+	    })
+	  },
+	  // 验证字段信息
+	  validateResult: function (userInfo) {
+	    var result = {
+	      status: false,
+	      msg: ''
+	    };
+
+	    // 验证手机号
+	    if (!_mm.validate(userInfo.phone, 'phone')) {
+	      result.msg = '手机号格式不正确';
+	      return result;
+	    }
+
+	    // 验证邮箱格式
+	    if (!_mm.validate(userInfo.email, 'email')) {
+	      result.msg = '邮箱格式不正确';
+	      return result;
+	    }
+	    // 验证密码提示问题是否为空
+	    if (!_mm.validate(userInfo.question, 'require')) {
+	      result.msg = '密码提示问题不能为空';
+	      return result;
+	    }
+	    // 验证密码提示问题答案是否为空
+	    if (!_mm.validate(userInfo.answer, 'require')) {
+	      result.msg = '密码提示问题答案不能为空';
+	      return result;
+	    }
+
+	    // 通过验证，返回正确提示
+	    result.status = true;
+	    result.msg = '验证通过';
+	    return result;
+	  }
+	}
+
+	$(function () {
+	  page.init();
+	});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 47 */,
+/* 48 */
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"user-info\"> <div class=\"form-line\"> <span class=\"label\">用户名：</span> <span class=\"text\">{{ username }}</span> </div> <div class=\"form-line\"> <span class=\"label\">电 话：</span> <input class=\"input\" id=\"phone\" autocomplete=\"off\" value=\"{{ phone }}\"> </div> <div class=\"form-line\"> <span class=\"label\">邮 箱：</span> <input class=\"input\" id=\"email\" autocomplete=\"off\" value=\"{{ email }}\"> </div> <div class=\"form-line\"> <span class=\"label\">问 题：</span> <input class=\"input\" id=\"question\" autocomplete=\"off\" value=\"{{ question }}\"> </div> <div class=\"form-line\"> <span class=\"label\">答 案：</span> <input class=\"input\" id=\"answer\" autocomplete=\"off\" value=\"{{ answer }}\"> </div> <span class=\"btn btn-submit\">提交</span> </div>";
 
 /***/ })
 ]);

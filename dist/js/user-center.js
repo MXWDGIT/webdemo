@@ -1,8 +1,8 @@
-webpackJsonp([1],[
+webpackJsonp([3],[
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(18);
+	module.exports = __webpack_require__(41);
 
 
 /***/ }),
@@ -23,16 +23,7 @@ webpackJsonp([1],[
 /* 15 */,
 /* 16 */,
 /* 17 */,
-/* 18 */
-/***/ (function(module, exports, __webpack_require__) {
-
-	__webpack_require__(19);
-	__webpack_require__(28);
-	var navSide = __webpack_require__(31);
-	var _mm = __webpack_require__(22);
-
-
-/***/ }),
+/* 18 */,
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1257,6 +1248,67 @@ webpackJsonp([1],[
 /***/ (function(module, exports) {
 
 	module.exports = "{{#navList}} {{#isActive}} <li class=\"nav-item active\"> {{/isActive}} {{^isActive}} </li><li class=\"nav-item\"> {{/isActive}} <a class=\"link\" href=\"{{href}}\">{{desc}}</a> </li> {{/navList}} ";
+
+/***/ }),
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
+/* 40 */,
+/* 41 */
+/***/ (function(module, exports, __webpack_require__) {
+
+	__webpack_require__(42);
+	__webpack_require__(19);
+	__webpack_require__(28);
+	var navSide = __webpack_require__(31);
+	var _user = __webpack_require__(26);
+	var _mm = __webpack_require__(22);
+	var templateIndex = __webpack_require__(44);
+
+
+
+	var page = {
+	  init: function () {
+	    this.onLoad();
+	  },
+	  onLoad: function () {
+	    // 初始化左侧菜单
+	    navSide.init({
+	      name: 'user-center'
+	    });
+
+	    // 加载用户信息
+	    this.loadUserInfo();
+	  },
+	  loadUserInfo: function () {
+	    var userHtml = '';
+	    _user.getUserInfo(function (res) {
+	      userHtml = _mm.renderHtml(templateIndex, res);
+	      $('.panel-body').html(userHtml);
+	    }, function (errMsg) {
+	      _mm.errorTips(errMsg);
+	    })
+	  }
+	}
+
+	$(function () {
+	  page.init();
+	});
+
+/***/ }),
+/* 42 */
+/***/ (function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 43 */,
+/* 44 */
+/***/ (function(module, exports) {
+
+	module.exports = "<div class=\"user-info\"> <div class=\"form-line\"> <span class=\"label\">用户名：</span> <span class=\"text\">{{ username }}</span> </div> <div class=\"form-line\"> <span class=\"label\">电 话：</span> <span class=\"text\">{{ phone }}</span> </div> <div class=\"form-line\"> <span class=\"label\">邮 箱：</span> <span class=\"text\">{{ email }}</span> </div> <div class=\"form-line\"> <span class=\"label\">问 题：</span> <span class=\"text\">{{ question }}</span> </div> <div class=\"form-line\"> <span class=\"label\">答 案：</span> <span class=\"text\">{{ answer }}</span> </div> <a class=\"btn btn-submit\" href=\"./user-center-update.html\">编辑</a> </div>";
 
 /***/ })
 ]);
